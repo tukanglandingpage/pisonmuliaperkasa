@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMP – Pison Mulia Perkasa | Heavy Mining Parts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --deep: #0f1117;
+    --surface: #141820;
+    --card: #1a1f2b;
+    --border: #242a38;
+    --accent: #e8a020;
+    --accent2: #ff6b1a;
+    --gold: #c8880a;
+    --text: #e8ecf4;
+    --muted: #6b7590;
+    --white: #ffffff;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 72px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-img { height: 44px; width: auto; display: block; object-fit: contain; }
+  .nav-logo-text-wrap { display: flex; flex-direction: column; }
+  .nav-logo-text { font-family: var(--font-display); font-size: 26px; color: var(--white); letter-spacing: 3px; line-height: 1; }
+  .nav-logo-sub { font-family: var(--font-mono); font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transition: transform 0.25s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--accent); color: var(--black);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 24px; border: none; cursor: pointer;
+    clip-path: polygon(0 0,100% 0,100% 80%,92% 100%,0 100%);
+    transition: background 0.2s, transform 0.2s; text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(232,160,32,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(232,160,32,0.04) 1px, transparent 1px);
+    background-size: 80px 80px; animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift { 0% { transform: translate(0,0); } 100% { transform: translate(80px, 80px); } }
+  .hero-glow { position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 65%); animation: glowPulse 4s ease-in-out infinite; }
+  @keyframes glowPulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+  .hero-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .hero-eyebrow::before { content: '▶ '; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(72px, 10vw, 160px); line-height: 0.9; letter-spacing: 2px; color: var(--white); opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+  .hero-title em { font-style: normal; color: var(--accent); display: block; }
+  .hero-title .outline { -webkit-text-stroke: 1px rgba(232,160,32,0.4); color: transparent; display: block; }
+  .hero-desc { max-width: 520px; margin-top: 32px; font-size: 16px; color: var(--muted); line-height: 1.8; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+  .hero-actions { display: flex; gap: 16px; margin-top: 48px; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+  .btn-primary { background: var(--accent); color: var(--black); font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 16px 36px; border: none; cursor: pointer; clip-path: polygon(0 0,100% 0,100% 75%,93% 100%,0 100%); transition: all 0.25s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--text); font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 16px 36px; border: 1px solid var(--border); cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { display: flex; gap: 64px; margin-top: 80px; opacity: 0; animation: fadeUp 0.8s 1s forwards; position: relative; }
+  .hero-stats::before { content: ''; position: absolute; top: -24px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); }
+  .stat-num { font-family: var(--font-display); font-size: 48px; color: var(--accent); line-height: 1; letter-spacing: 2px; }
+  .stat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+  .hero-badge { position: absolute; right: 80px; bottom: 120px; width: 140px; height: 140px; animation: rotateSlow 20s linear infinite; opacity: 0.5; }
+  @keyframes rotateSlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* TICKER */
+  .ticker { background: var(--accent); padding: 12px 0; overflow: hidden; display: flex; border-top: 1px solid var(--gold); }
+  .ticker-track { display: flex; gap: 0; white-space: nowrap; animation: tickerScroll 30s linear infinite; }
+  .ticker-item { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--black); padding: 0 40px; display: flex; align-items: center; gap: 12px; }
+  .ticker-dot { width: 5px; height: 5px; background: var(--black); opacity: 0.4; border-radius: 50%; flex-shrink: 0; }
+  @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* SECTION SHARED */
+  section { padding: 120px 48px; }
+  .section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+  .section-title { font-family: var(--font-display); font-size: clamp(40px, 5vw, 72px); line-height: 0.95; letter-spacing: 2px; color: var(--white); margin-bottom: 24px; }
+  .section-desc { max-width: 560px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 72px; align-items: start; }
+  .about-visual { position: relative; background: var(--surface); border: 1px solid var(--border); padding: 48px; clip-path: polygon(0 0, 100% 0, 100% 90%, 94% 100%, 0 100%); }
+  .about-visual-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .about-cell { background: var(--card); padding: 32px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .about-cell-num { font-family: var(--font-display); font-size: 48px; color: var(--accent); line-height: 1; }
+  .about-cell-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .about-content { padding-top: 16px; }
+  .about-content p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-bottom: 24px; }
+  .about-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+  .about-list li { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; color: var(--text); padding: 12px 16px; border-left: 2px solid var(--accent); background: var(--surface); display: flex; align-items: center; gap: 12px; }
+  .about-list li::before { content: '◆'; color: var(--accent); font-size: 8px; }
+
+  /* INDUSTRIES */
+  .industries { background: var(--deep); }
+  .industry-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 64px; background: var(--border); border: 1px solid var(--border); }
+  .industry-card { background: var(--card); padding: 40px 28px; transition: background 0.3s; cursor: default; position: relative; overflow: hidden; }
+  .industry-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; }
+  .industry-card:hover { background: var(--surface); }
+  .industry-card:hover::after { transform: scaleX(1); }
+  .industry-icon { width: 64px; height: 64px; object-fit: contain; margin-bottom: 20px; display: block; filter: brightness(0) invert(1) opacity(0.7); transition: filter 0.3s; }
+  .industry-card:hover .industry-icon { filter: brightness(0) saturate(100%) invert(65%) sepia(80%) saturate(500%) hue-rotate(5deg) brightness(105%); }
+  .industry-name { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 12px; }
+  .industry-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* CATALOG */
+  .catalog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 24px; }
+  .catalog-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 8px 20px; background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(232,160,32,0.06); }
+  .catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .product-card { background: var(--card); border: 1px solid var(--border); transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; }
+  .product-card:hover { border-color: rgba(232,160,32,0.3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .product-card:hover::before { transform: scaleX(1); }
+  .product-card.hidden { display: none; }
+  .product-img { height: 200px; background: var(--surface); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .product-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, var(--card)); pointer-events: none; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  .product-card:hover .product-img img { transform: scale(1.06); }
+  .product-badge { position: absolute; top: 16px; right: 16px; z-index: 1; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; background: var(--accent); color: var(--black); }
+  .product-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .product-sku { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .product-name { font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; color: var(--white); margin-bottom: 8px; }
+  .product-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; flex: 1; }
+  .product-specs { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+  .spec-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; }
+  .spec-key { color: var(--muted); letter-spacing: 1px; }
+  .spec-val { color: var(--text); }
+  .product-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border); }
+  .product-price { font-family: var(--font-display); font-size: 28px; color: var(--accent); letter-spacing: 1px; }
+  .product-price span { font-size: 14px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0; }
+  .add-cart-btn { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 20px; background: var(--accent); color: var(--black); border: none; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0,100% 0,100% 75%,88% 100%,0 100%); }
+  .add-cart-btn:hover { background: var(--accent2); transform: scale(1.03); }
+  .add-cart-btn.added { background: #2ecc71; color: var(--white); }
+
+  /* CART SIDEBAR */
+  .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-sidebar { position: fixed; right: 0; top: 0; bottom: 0; width: 400px; background: var(--surface); border-left: 1px solid var(--border); z-index: 2001; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; }
+  .cart-sidebar.open { transform: translateX(0); }
+  .cart-header { padding: 24px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .cart-header h3 { font-family: var(--font-display); font-size: 24px; letter-spacing: 2px; }
+  .cart-close { background: none; border: 1px solid var(--border); color: var(--muted); width: 36px; height: 36px; cursor: pointer; font-size: 18px; transition: all 0.2s; }
+  .cart-close:hover { border-color: var(--accent); color: var(--accent); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 24px 28px; display: flex; flex-direction: column; gap: 16px; }
+  .cart-empty { text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; margin: 40px 0; }
+  .cart-empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .cart-item { background: var(--card); border: 1px solid var(--border); padding: 16px; display: flex; gap: 16px; align-items: flex-start; }
+  .cart-item-thumb { width: 52px; height: 52px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border); background: var(--surface); }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-family: var(--font-display); font-size: 16px; letter-spacing: 1px; margin-bottom: 4px; }
+  .cart-item-sku { font-family: var(--font-mono); font-size: 9px; color: var(--accent); letter-spacing: 2px; }
+  .cart-item-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .cart-qty { display: flex; align-items: center; gap: 8px; }
+  .qty-btn { width: 26px; height: 26px; background: var(--surface); border: 1px solid var(--border); color: var(--text); cursor: pointer; font-size: 14px; transition: all 0.2s; }
+  .qty-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .qty-num { font-family: var(--font-mono); font-size: 13px; min-width: 20px; text-align: center; }
+  .cart-item-price { font-family: var(--font-display); font-size: 20px; color: var(--accent); }
+  .cart-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; transition: color 0.2s; padding: 4px; }
+  .cart-remove:hover { color: #e74c3c; }
+  .cart-footer { padding: 24px 28px; border-top: 1px solid var(--border); }
+  .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .cart-total-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .cart-total-amount { font-family: var(--font-display); font-size: 36px; color: var(--accent); }
+  .checkout-btn { width: 100%; padding: 16px; background: var(--accent); color: var(--black); font-family: var(--font-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; }
+  .checkout-btn:hover { background: var(--accent2); }
+
+  /* CART FLOAT */
+  .cart-float { position: fixed; bottom: 40px; right: 40px; z-index: 999; background: var(--accent); color: var(--black); border: none; cursor: pointer; width: 60px; height: 60px; clip-path: polygon(0 0,100% 0,100% 80%,80% 100%,0 100%); font-size: 22px; display: flex; align-items: center; justify-content: center; transition: all 0.25s; box-shadow: 0 8px 32px rgba(232,160,32,0.3); }
+  .cart-float:hover { background: var(--accent2); transform: scale(1.1); }
+  .cart-count { position: absolute; top: -6px; right: -6px; background: var(--accent2); color: var(--white); width: 22px; height: 22px; border-radius: 50%; font-family: var(--font-mono); font-size: 11px; display: none; align-items: center; justify-content: center; }
+  .cart-count.visible { display: flex; }
+
+  /* WHY US */
+  .why { background: var(--deep); }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; }
+  .why-card { padding: 40px 32px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: all 0.3s; }
+  .why-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px; background: var(--accent); transform: scaleY(0); transition: transform 0.3s; transform-origin: bottom; }
+  .why-card:hover { background: var(--card); }
+  .why-card:hover::before { transform: scaleY(1); }
+  .why-num { font-family: var(--font-display); font-size: 80px; color: rgba(232,160,32,0.08); line-height: 1; margin-bottom: 16px; }
+  .why-title { font-family: var(--font-display); font-size: 26px; letter-spacing: 2px; color: var(--white); margin-bottom: 16px; }
+  .why-desc { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+  /* BRANDS */
+  .brands { background: var(--black); }
+  .brands-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: 56px; background: var(--border); border: 1px solid var(--border); overflow: hidden; }
+  .brand-item { background: var(--card); padding: 36px 20px; text-align: center; transition: background 0.2s; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .brand-item:hover { background: var(--surface); }
+  .brand-logo { width: 100%; max-width: 120px; height: 56px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.5); transition: filter 0.3s; }
+  .brand-item:hover .brand-logo { filter: brightness(0) saturate(100%) invert(65%) sepia(80%) saturate(500%) hue-rotate(5deg) brightness(105%); }
+  .brand-name { font-family: var(--font-display); font-size: 18px; letter-spacing: 3px; color: var(--muted); transition: color 0.2s; }
+  .brand-item:hover .brand-name { color: var(--accent); }
+  .brand-sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: rgba(107,117,144,0.5); text-transform: uppercase; }
+
+  /* CONSIGNMENTS */
+  .consignments { background: var(--deep); }
+  .consignment-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: 56px; background: var(--border); border: 1px solid var(--border); overflow: hidden; }
+  .consignment-item { background: var(--card); padding: 32px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px; transition: background 0.3s; position: relative; overflow: hidden; }
+  .consignment-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; }
+  .consignment-item:hover { background: var(--surface); }
+  .consignment-item:hover::after { transform: scaleX(1); }
+  .consignment-logo { width: 100%; max-width: 110px; height: 52px; object-fit: contain; filter: brightness(0) invert(1) opacity(0.45); transition: filter 0.3s; }
+  .consignment-item:hover .consignment-logo { filter: brightness(0) saturate(100%) invert(65%) sepia(80%) saturate(500%) hue-rotate(5deg) brightness(105%); }
+  .consignment-name { font-family: var(--font-display); font-size: 14px; letter-spacing: 2px; color: var(--muted); text-align: center; transition: color 0.2s; line-height: 1.3; }
+  .consignment-item:hover .consignment-name { color: var(--text); }
+
+  /* OUR LOCATIONS */
+  .locations { background: var(--black); }
+  .locations-inner { margin-top: 56px; position: relative; border: 1px solid var(--border); overflow: hidden; }
+  .locations-img { width: 100%; display: block; max-height: 580px; object-fit: cover; opacity: 0.85; transition: opacity 0.4s; }
+  .locations-inner:hover .locations-img { opacity: 1; }
+  .locations-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 48px; background: linear-gradient(0deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 70%, transparent 100%); }
+  .locations-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .locations-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .locations-address { font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 32px); color: var(--white); letter-spacing: 1px; line-height: 1.3; }
+
+  /* CONTACT */
+  .contact { background: var(--deep); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 64px; }
+  .contact-info { display: flex; flex-direction: column; gap: 32px; }
+  .contact-block { padding-left: 24px; border-left: 2px solid var(--border); transition: border-color 0.2s; }
+  .contact-block:hover { border-color: var(--accent); }
+  .contact-block-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .contact-block-value { font-size: 15px; color: var(--text); line-height: 1.7; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .form-input { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 14px 16px; font-family: var(--font-body); font-size: 14px; transition: border-color 0.2s; outline: none; resize: vertical; }
+  .form-input:focus { border-color: var(--accent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-submit { padding: 16px 40px; background: var(--accent); color: var(--black); font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; clip-path: polygon(0 0,100% 0,100% 75%,93% 100%,0 100%); transition: all 0.2s; align-self: flex-start; }
+  .form-submit:hover { background: var(--accent2); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 64px 48px 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px; margin-bottom: 48px; }
+  .footer-logo-img { height: 48px; width: auto; object-fit: contain; margin-bottom: 8px; display: block; }
+  .footer-logo-sub { font-family: var(--font-mono); font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-tagline { font-size: 14px; color: var(--muted); margin-top: 16px; line-height: 1.7; max-width: 280px; }
+  .footer-col-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--border); }
+  .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .footer-flag { font-size: 20px; }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: var(--surface); border: 1px solid var(--border); max-width: 680px; width: 90%; transform: translateY(20px); transition: transform 0.3s; clip-path: polygon(0 0,100% 0,100% 95%,97% 100%,0 100%); position: relative; }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-img { height: 240px; background: var(--deep); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); overflow: hidden; }
+  .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-body { padding: 36px; }
+  .modal-sku { font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px; color: var(--accent); margin-bottom: 8px; }
+  .modal-title { font-family: var(--font-display); font-size: 40px; letter-spacing: 2px; margin-bottom: 16px; }
+  .modal-desc { color: var(--muted); font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
+  .modal-specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 28px; }
+  .modal-spec { background: var(--card); padding: 12px 16px; border-left: 2px solid var(--border); }
+  .modal-spec-key { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .modal-spec-val { font-size: 14px; color: var(--text); margin-top: 4px; }
+  .modal-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--border); }
+  .modal-price { font-family: var(--font-display); font-size: 40px; color: var(--accent); }
+  .modal-actions { display: flex; gap: 12px; }
+  .modal-close-btn { position: absolute; top: 16px; right: 16px; background: var(--surface); border: 1px solid var(--border); color: var(--muted); width: 36px; height: 36px; cursor: pointer; font-size: 18px; transition: all 0.2s; z-index: 1; }
+  .modal-close-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 120px; right: 40px; z-index: 4000; background: var(--card); border: 1px solid var(--accent); border-left: 3px solid var(--accent); padding: 16px 24px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; gap: 12px; max-width: 320px; }
+  .toast.show { transform: translateX(0); }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1200px) {
+    .nav-links { gap: 18px; }
+  }
+  @media (max-width: 1024px) {
+    .catalog-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .brands-grid { grid-template-columns: repeat(3, 1fr); }
+    .consignment-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 80px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-stats { gap: 32px; flex-wrap: wrap; }
+    .catalog-grid, .why-grid, .industry-cards { grid-template-columns: 1fr; }
+    .brands-grid, .consignment-grid { grid-template-columns: repeat(2, 1fr); }
+    .cart-sidebar { width: 100%; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .form-row { grid-template-columns: 1fr; }
+    .locations-overlay { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <img class="nav-logo-img" src="images/PisonLogo.png" alt="Pison Mulia Perkasa Logo">
+    <div class="nav-logo-text-wrap">
+      <div class="nav-logo-text">PMP</div>
+      <div class="nav-logo-sub">Pison Mulia Perkasa</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#catalog">Catalog</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#consignments">Consignments</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">Indonesia's Heavy Equipment Parts Specialist</div>
+  <h1 class="hero-title">
+    <span class="outline">HEAVY EQUIPMENT</span>
+    <em>SPARE PARTS</em>
+    SPECIALIST
+  </h1>
+  <p class="hero-desc">PT Pison Mulia Perkasa specializes in the supply and distribution of replacement spare parts for earthmoving equipment — Undercarriage, G.E.T., Filters and related components. Serving national and international markets.</p>
+  <div class="hero-actions">
+    <a href="#catalog" class="btn-primary">View Catalog ↓</a>
+    <a href="#contact" class="btn-ghost">Contact Us →</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">2500+</div><div class="stat-label">SKUs Available</div></div>
+    <div><div class="stat-num">2023</div><div class="stat-label">Est.</div></div>
+    <div><div class="stat-num">10+</div><div class="stat-label">Consignments</div></div>
+    <div><div class="stat-num">INT'L</div><div class="stat-label">Market Reach</div></div>
+  </div>
+  <svg class="hero-badge" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="70" cy="70" r="60" stroke="rgba(232,160,32,0.3)" stroke-width="1"/>
+    <path id="textPath" d="M70,70 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/>
+    <text font-family="'DM Mono', monospace" font-size="9" fill="rgba(232,160,32,0.6)" letter-spacing="3">
+      <textPath href="#textPath">PISON MULIA PERKASA ◆ MINING PARTS ◆ INDONESIA ◆ </textPath>
+    </text>
+    <text x="70" y="75" text-anchor="middle" font-family="'Bebas Neue'" font-size="18" fill="rgba(232,160,32,0.8)" letter-spacing="3">PMP</text>
+  </svg>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Us</div>
+  <div class="about-grid reveal">
+    <div class="about-visual">
+      <div class="about-visual-inner">
+        <div class="about-cell"><div class="about-cell-num">2500+</div><div class="about-cell-label">SKUs Available</div></div>
+        <div class="about-cell"><div class="about-cell-num">2023</div><div class="about-cell-label">Year Founded</div></div>
+        <div class="about-cell"><div class="about-cell-num">100%</div><div class="about-cell-label">Quality Assured</div></div>
+        <div class="about-cell"><div class="about-cell-num">INT'L</div><div class="about-cell-label">Market Reach</div></div>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-title">WHO<br><em style="color:var(--accent)">WE ARE</em></div>
+      <p>PT Pison Mulia Perkasa (PMP) was founded in 2023. We are engaged in the supply and distribution of replacement spare parts for earthmoving equipment including: Undercarriage, G.E.T., Filters and other related components.</p>
+      <p>We provide products of the best quality, so that they can meet the usage standards for each equipment. Therefore, we hope to be able to reach the needs of national and international markets.</p>
+      <ul class="about-list">
+        <li>Undercarriage Parts — Track Shoes, Rollers, Idlers, Sprockets</li>
+        <li>G.E.T. — Ground Engaging Tools for all major brands</li>
+        <li>Filters — Air, Fuel, Oil &amp; Hydraulic across all makes</li>
+        <li>Products meeting equipment usage standards</li>
+        <li>Serving national and international markets</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries" class="industries">
+  <div class="section-label">Industry Sectors</div>
+  <div class="section-title">INDUSTRIES<br>WE SERVE</div>
+  <p class="section-desc">Our products cover heavy equipment spare part needs across multiple extractive and heavy construction industries.</p>
+  <div class="industry-cards reveal">
+    <div class="industry-card">
+      <img class="industry-icon" src="images/Pickaxe.png" alt="Mining">
+      <div class="industry-name">MINING</div>
+      <div class="industry-desc">Coal, nickel, gold, tin. Spare parts for excavators, dump trucks, dozers, and graders at open-pit and underground mine sites.</div>
+    </div>
+    <div class="industry-card">
+      <img class="industry-icon" src="images/Crane.png" alt="Construction">
+      <div class="industry-name">CONSTRUCTION</div>
+      <div class="industry-desc">Large-scale infrastructure projects. We supply components for cranes, compactors, and the full fleet of heavy construction equipment.</div>
+    </div>
+    <div class="industry-card">
+      <img class="industry-icon" src="images/PalmoilTree.png" alt="Plantation">
+      <div class="industry-name">PLANTATION</div>
+      <div class="industry-desc">Palm oil and forestry operations. Components for bulldozers, motor graders, and land clearing equipment always available.</div>
+    </div>
+    <div class="industry-card">
+      <img class="industry-icon" src="images/Energi.png" alt="Energy">
+      <div class="industry-name">ENERGY</div>
+      <div class="industry-desc">Oil, gas and power generation projects. Spare parts for drilling, handling, and heavy transport equipment in energy operations.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+  <div class="catalog-header">
+    <div>
+      <div class="section-label">Product Catalog</div>
+      <div class="section-title" style="margin-bottom:0">SPARE PARTS</div>
+    </div>
+    <div class="catalog-filters" id="filterBtns">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="undercarriage">Undercarriage</button>
+      <button class="filter-btn" data-filter="hydraulic">Hydraulic</button>
+      <button class="filter-btn" data-filter="engine">Engine</button>
+      <button class="filter-btn" data-filter="transmission">Transmission</button>
+      <button class="filter-btn" data-filter="electrical">Electrical</button>
+    </div>
+  </div>
+  <div class="catalog-grid reveal" id="catalogGrid"></div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="why">
+  <div class="section-label">Our Advantages</div>
+  <div class="section-title">WHY CHOOSE<br>PMP?</div>
+  <div class="why-grid reveal">
+    <div class="why-card"><div class="why-num">01</div><div class="why-title">QUALITY GUARANTEED</div><div class="why-desc">All products are genuine OEM components or certified aftermarket parts. Supplied with official documentation and COA from the manufacturer.</div></div>
+    <div class="why-card"><div class="why-num">02</div><div class="why-title">READY TO SHIP</div><div class="why-desc">Warehouses in Jakarta and Kalimantan enable delivery within 24–48 hours across Indonesia, including remote locations.</div></div>
+    <div class="why-card"><div class="why-num">03</div><div class="why-title">COMPETITIVE PRICING</div><div class="why-desc">Direct relationships with global principals cut the distribution chain — delivering competitive prices without sacrificing quality.</div></div>
+    <div class="why-card"><div class="why-num">04</div><div class="why-title">TECHNICAL SUPPORT</div><div class="why-desc">Our experienced engineers are ready to help with part number identification, equipment compatibility, and product recommendations.</div></div>
+    <div class="why-card"><div class="why-num">05</div><div class="why-title">FULL WARRANTY</div><div class="why-desc">All products are covered by official warranties. Easy and transparent claims process ensures your investment is fully protected.</div></div>
+    <div class="why-card"><div class="why-num">06</div><div class="why-title">CORPORATE SERVICE</div><div class="why-desc">Special programs for corporate customers: credit terms, contract pricing, VMI (Vendor Managed Inventory), and dedicated account managers.</div></div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section id="brands" class="brands">
+  <div class="section-label">Brand Partners</div>
+  <div class="section-title">BRANDS WE<br>DISTRIBUTE</div>
+  <p class="section-desc">We partner with globally recognised manufacturers to ensure authentic, high-quality components for every machine.</p>
+  <div class="brands-grid reveal">
+    <div class="brand-item">
+      <img class="brand-logo" src="images/Donaldson.png" alt="Donaldson">
+      <div class="brand-name">DONALDSON</div>
+      <div class="brand-sub">Filtration</div>
+    </div>
+    <div class="brand-item">
+      <img class="brand-logo" src="images/Bulltrack.png" alt="Bulltrack">
+      <div class="brand-name">BULLTRACK</div>
+      <div class="brand-sub">Undercarriage</div>
+    </div>
+    <div class="brand-item">
+      <img class="brand-logo" src="images/Hosenda.png" alt="Hosenda">
+      <div class="brand-name">HOSENDA</div>
+      <div class="brand-sub">Heavy Parts</div>
+    </div>
+    <div class="brand-item">
+      <img class="brand-logo" src="images/ITR.png" alt="ITR">
+      <div class="brand-name">ITR</div>
+      <div class="brand-sub">Undercarriage</div>
+    </div>
+    <div class="brand-item">
+      <img class="brand-logo" src="images/USG.png" alt="USG">
+      <div class="brand-name">USG</div>
+      <div class="brand-sub">Components</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSIGNMENTS -->
+<section id="consignments" class="consignments">
+  <div class="section-label">Trusted By</div>
+  <div class="section-title">OUR<br>CONSIGNMENTS</div>
+  <p class="section-desc">Leading mining and industrial companies across Indonesia trust PMP to keep their heavy equipment running.</p>
+  <div class="consignment-grid reveal">
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Adaro.png" alt="Adaro Indonesia">
+      <div class="consignment-name">ADARO INDONESIA</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Antam.png" alt="Antam">
+      <div class="consignment-name">ANTAM</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Sinarmas.png" alt="Sinarmas">
+      <div class="consignment-name">SINARMAS</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Bukit.png" alt="Bukit Asam">
+      <div class="consignment-name">BUKIT ASAM</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/ASK.png" alt="Artha Saya Karunia">
+      <div class="consignment-name">ASK</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Hasnur.png" alt="Hasnur Group">
+      <div class="consignment-name">HASNUR GROUP</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Kayu.png" alt="Kayu Lapis Indonesia">
+      <div class="consignment-name">KAYU LAPIS INDONESIA</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/KPC.png" alt="KPC">
+      <div class="consignment-name">KPC</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Petrosea.png" alt="Petrosea">
+      <div class="consignment-name">PETROSEA</div>
+    </div>
+    <div class="consignment-item">
+      <img class="consignment-logo" src="images/Wasco.png" alt="Wasco">
+      <div class="consignment-name">WASCO</div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR LOCATIONS -->
+<section id="locations" class="locations">
+  <div class="section-label">Our Locations</div>
+  <div class="section-title">WHERE TO<br>FIND US</div>
+  <div class="locations-inner reveal">
+    <img class="locations-img" src="images/OurLocation.png" alt="PMP Office Location — Ruko Intercon Megah, Jakarta Barat">
+    <div class="locations-overlay">
+      <div class="locations-tag">Head Office — Jakarta Barat</div>
+      <div class="locations-address">Ruko Intercon Megah Blok W3/17A<br>Jl. Joglo Raya, Kembangan, Jakarta Barat 11640</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="section-label">Contact Us</div>
+  <div class="section-title">GET A<br>QUOTE</div>
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <div class="contact-block">
+        <div class="contact-block-label">Office Address</div>
+        <div class="contact-block-value">Ruko Intercon Megah Blok W3/17A<br>Jl. Joglo Raya, Kembangan<br>Jakarta Barat 11640, Indonesia</div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-block-label">WhatsApp</div>
+        <div class="contact-block-value">0811-2815-959</div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-block-label">Email</div>
+        <div class="contact-block-value">sales@pisonmuliaperkasa.co.id<br>info@pisonmuliaperkasa.co.id</div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-block-label">Operating Hours</div>
+        <div class="contact-block-value">Monday – Friday: 08:00 – 17:00 WIB<br>Saturday: 08:00 – 13:00 WIB</div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleForm(event)">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" type="text" placeholder="John Smith" required></div>
+        <div class="form-group"><label class="form-label">Company</label><input class="form-input" type="text" placeholder="PT. Mining Company"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="john@company.com" required></div>
+        <div class="form-group"><label class="form-label">WhatsApp Number</label><input class="form-input" type="tel" placeholder="+62 811 ..."></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Equipment Type</label>
+        <select class="form-input" style="cursor:pointer">
+          <option value="">-- Select Equipment --</option>
+          <option>Excavator</option><option>Dump Truck</option><option>Bulldozer</option>
+          <option>Motor Grader</option><option>Wheel Loader</option><option>Crusher</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Message / Part Number List</label><textarea class="form-input" rows="4" placeholder="Describe your spare part requirements, include part numbers if available..."></textarea></div>
+      <button type="submit" class="form-submit">Send Inquiry →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img class="footer-logo-img" src="images/PisonLogo.png" alt="Pison Mulia Perkasa">
+      <div class="footer-logo-sub">Pison Mulia Perkasa</div>
+      <p class="footer-tagline">Supply and distribution of replacement spare parts for earthmoving equipment. Serving national and international markets since 2023.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="#catalog">Undercarriage Parts</a></li>
+        <li><a href="#catalog">G.E.T. Components</a></li>
+        <li><a href="#catalog">Filters</a></li>
+        <li><a href="#catalog">Hydraulic System</a></li>
+        <li><a href="#catalog">Engine Components</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About PMP</a></li>
+        <li><a href="#industries">Industries Served</a></li>
+        <li><a href="#brands">Brand Partners</a></li>
+        <li><a href="#consignments">Consignments</a></li>
+        <li><a href="#locations">Our Locations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#contact">Request Quotation</a></li>
+        <li><a href="#contact">Corporate Account</a></li>
+        <li><a href="#contact">VMI Program</a></li>
+        <li><a href="#contact">Technical Support</a></li>
+        <li><a href="#contact">After Sales Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 PT Pison Mulia Perkasa. All Rights Reserved.</div>
+    <div class="footer-flag">🇮🇩</div>
+  </div>
+</footer>
+
+<!-- CART FLOAT -->
+<button class="cart-float" id="cartFloat" onclick="toggleCart()">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>CART</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><div class="cart-empty-icon">📦</div><div>CART IS EMPTY</div></div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">Rp 0</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">REQUEST QUOTE →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span>✓</span>
+  <span id="toastMsg">Product added to cart</span>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-body">
+      <div class="modal-sku" id="modalSku"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-specs-grid" id="modalSpecs"></div>
+      <div class="modal-footer">
+        <div class="modal-price" id="modalPrice"></div>
+        <div class="modal-actions">
+          <button class="btn-ghost" onclick="closeModal()">Close</button>
+          <button class="btn-primary" id="modalAddBtn">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const products = [
+  { id:1,  sku:'UC-TRK-001', name:'Track Shoe Assembly',          desc:'Track shoes for Komatsu PC200–PC800 excavators. High-grade forged steel material with superior wear resistance.',           category:'undercarriage', image:'images/TrackShoe.png',       badge:'IN STOCK', price:4500000,  specs:{'Compatibility':'Komatsu PC200-800','Material':'Forged Steel','Width':'600mm','Warranty':'12 Months'}, featured:true },
+  { id:2,  sku:'UC-ROL-002', name:'Bottom Roller',                 desc:'Lower track roller for Caterpillar 320/323/330. Equipped with special dust and mud-resistant seals.',                        category:'undercarriage', image:'images/BottomRoller.png',     badge:'',         price:2800000,  specs:{'Compatibility':'CAT 320-330','Type':'Double Flange','Diameter':'220mm','Warranty':'12 Months'} },
+  { id:3,  sku:'UC-IDL-003', name:'Front Idler',                   desc:'Front idler for Hitachi EX200-EX450. Heat treatment process for optimal hardness HRC 50-55.',                               category:'undercarriage', image:'images/IdlerWheel.png',       badge:'',         price:8200000,  specs:{'Compatibility':'Hitachi EX200-450','Process':'Heat Treated','Weight':'87 kg','Warranty':'12 Months'} },
+  { id:4,  sku:'UC-SPK-004', name:'Sprocket Segment',              desc:'Sprocket segment for Komatsu HD785 dump truck. Can be installed without removing the entire chain.',                         category:'undercarriage', image:'images/SprocketSegment.png',  badge:'LIMITED',  price:3200000,  specs:{'Compatibility':'Komatsu HD785','Teeth':'8T','Type':'Segmented','Warranty':'6 Months'} },
+  { id:5,  sku:'HYD-PMP-005', name:'Hydraulic Pump Assy',          desc:'Main hydraulic pump for Volvo EC210-EC480 excavators. Operating pressure up to 350 bar with high volumetric efficiency.',   category:'hydraulic',     image:'images/HydraulicPump.png',    badge:'OEM',      price:32000000, specs:{'Max Pressure':'350 bar','Flow Rate':'210 L/min','Compatibility':'Volvo EC210-480','Warranty':'18 Months'}, featured:true },
+  { id:6,  sku:'HYD-CYL-006', name:'Hydraulic Cylinder Seal Kit',  desc:'Complete hydraulic cylinder seal kit for boom/arm/bucket. NBR and Polyurethane material resistant -40°C to 120°C.',       category:'hydraulic',     image:'images/HydraulicSealKit.png', badge:'',         price:1250000,  specs:{'Material':'NBR + PU','Operating Temp':'-40°C ~ 120°C','Compatibility':'Universal','Kit Contents':'28 pcs'} },
+  { id:7,  sku:'HYD-VLV-007', name:'Control Valve Assembly',       desc:'Multi-function control valve for CAT 320 excavators. High precision with minimal leakage below ISO 5605 standard.',       category:'hydraulic',     image:'images/ControlValve.png',    badge:'',         price:18500000, specs:{'Compatibility':'CAT 320/323','Pressure':'310 bar','Ports':'10 section','Warranty':'12 Months'} },
+  { id:8,  sku:'ENG-PST-008', name:'Piston & Ring Set',            desc:'Piston and ring set for Cummins QSB6.7 and QSX15 engines. Aluminium alloy with chrome coating for high durability.',       category:'engine',        image:'images/PistonRing.png',      badge:'OEM',      price:9800000,  specs:{'Engine':'Cummins QSB6.7','Diameter':'107mm','Coating':'Chrome','Warranty':'12 Months'}, featured:true },
+  { id:9,  sku:'ENG-GKT-009', name:'Full Gasket Set',              desc:'Complete engine gasket set for Komatsu S6D125. Includes head gasket, manifold gasket and all engine seals. MLS material.',  category:'engine',        image:'images/FullGasketSet.png',   badge:'',         price:5400000,  specs:{'Engine':'Komatsu S6D125','Type':'Full Set','Material':'MLS Steel','Warranty':'12 Months'} },
+  { id:10, sku:'ENG-FLT-010', name:'Air Filter Primary',           desc:'Primary air filter for heavy equipment diesel engines. 99.9% filtration efficiency with double corrugated paper media.',   category:'engine',        image:'images/AirFilter.png',       badge:'',         price:680000,   specs:{'Compatibility':'Multi-brand','Efficiency':'99.9%','Dimensions':'300x450mm','Interval':'500 hrs'} },
+  { id:11, sku:'ENG-INJ-011', name:'Fuel Injector',                desc:'High-precision fuel injector for Komatsu PC450. Injection pressure 1800 bar with perfect atomisation.',                   category:'engine',        image:'images/FuelInjector.png',    badge:'LIMITED',  price:4200000,  specs:{'Pressure':'1800 bar','Compatibility':'Komatsu PC450','Standard':'Tier 4 Final','Warranty':'6 Months'} },
+  { id:12, sku:'TRN-CLT-012', name:'Torque Converter',             desc:'Torque converter for Komatsu D155/D375 Dozer. Maximum torque ratio 3.2:1 with high transmission efficiency.',              category:'transmission',  image:'images/TorqueConvertor.png', badge:'OEM',      price:48000000, specs:{'Compatibility':'Komatsu D155-375','Torque Ratio':'3.2:1','Weight':'245 kg','Warranty':'24 Months'} },
+  { id:13, sku:'TRN-BRK-013', name:'Brake Disc Set',               desc:'Brake disc set for Caterpillar 777/785 dump trucks. Special cast iron with optimum groove pattern for cooling.',           category:'transmission',  image:'images/BrakeDiscSet.png',    badge:'',         price:7600000,  specs:{'Compatibility':'CAT 777/785','Diameter':'680mm','Thickness':'32mm','Warranty':'12 Months'} },
+  { id:14, sku:'ELC-ALT-014', name:'Alternator 24V 80A',           desc:'24V 80A alternator for excavator and dump truck electrical systems. Internal voltage regulator and overcharge protection.', category:'electrical',    image:'images/Alternator.png',      badge:'',         price:3800000,  specs:{'Voltage':'24V','Current':'80A','Connection':'B+/D+/W','Warranty':'12 Months'} },
+  { id:15, sku:'ELC-STR-015', name:'Starter Motor 24V',            desc:'24V 7.5kW starter motor for heavy equipment diesel engines. High cranking power down to -20°C extreme cold.',             category:'electrical',    image:'images/StarterMotor.png',    badge:'IN STOCK', price:5200000,  specs:{'Voltage':'24V','Power':'7.5 kW','Operating Temp':'-20°C ~ 60°C','Warranty':'12 Months'} },
+  { id:16, sku:'ELC-SNS-016', name:'Sensor Kit ECM',               desc:'Complete ECM sensor package: temperature, pressure, level, and speed sensors. Original for Cummins and Komatsu.',          category:'electrical',    image:'images/SensorKitECM.png',    badge:'OEM',      price:2900000,  specs:{'Type':'Multi-sensor kit','Compatibility':'Cummins/Komatsu','Connection':'OEM plug-in','Warranty':'12 Months'} },
+];
+
+let cart = [];
+let activeFilter = 'all';
+let currentModalProduct = null;
+
+// TICKER
+const tickerItems = ['Undercarriage Parts','G.E.T. Components','Filters','Donaldson','Bulltrack','ITR','USG','Hosenda','Fast Delivery 48H','National & International Market','Est. 2023'];
+const track = document.getElementById('tickerTrack');
+[...tickerItems,...tickerItems,...tickerItems].forEach(t => {
+  const el = document.createElement('span');
+  el.className = 'ticker-item';
+  el.innerHTML = `<span class="ticker-dot"></span>${t}`;
+  track.appendChild(el);
+});
+
+// RENDER CATALOG
+function renderCatalog() {
+  const grid = document.getElementById('catalogGrid');
+  grid.innerHTML = '';
+  products.forEach(p => {
+    const visible = activeFilter === 'all' || p.category === activeFilter;
+    const card = document.createElement('div');
+    card.className = 'product-card' + (visible ? '' : ' hidden');
+    card.dataset.category = p.category;
+    card.innerHTML = `
+      <div class="product-img">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="product-body">
+        <div class="product-sku">${p.sku}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc.substring(0,80)}...</div>
+        <div class="product-specs">
+          ${Object.entries(p.specs).slice(0,3).map(([k,v])=>`<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join('')}
+        </div>
+        <div class="product-footer">
+          <div class="product-price">Rp ${p.price.toLocaleString('id-ID')}<span> /unit</span></div>
+          <button class="add-cart-btn" onclick="addToCart(${p.id}, event)">+ Cart</button>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('add-cart-btn')) openModal(p);
+    });
+    grid.appendChild(card);
+  });
+}
+
+// FILTER
+document.getElementById('filterBtns').addEventListener('click', e => {
+  if (!e.target.classList.contains('filter-btn')) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeFilter = e.target.dataset.filter;
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.classList.toggle('hidden', activeFilter !== 'all' && card.dataset.category !== activeFilter);
+  });
+});
+
+// CART
+function addToCart(id, e) {
+  if (e) e.stopPropagation();
+  const p = products.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if (existing) existing.qty++;
+  else cart.push({...p, qty: 1});
+  renderCart();
+  showToast(`${p.name} added to cart`);
+  if (e) {
+    const btn = e.target;
+    btn.textContent = '✓ Added';
+    btn.classList.add('added');
+    setTimeout(() => { btn.textContent = '+ Cart'; btn.classList.remove('added'); }, 1500);
+  }
+}
+
+function renderCart() {
+  const itemsEl = document.getElementById('cartItems');
+  const countEl = document.getElementById('cartCount');
+  const totalEl = document.getElementById('cartTotal');
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+  countEl.textContent = totalQty;
+  countEl.classList.toggle('visible', totalQty > 0);
+  totalEl.textContent = 'Rp ' + total.toLocaleString('id-ID');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">📦</div><div>CART IS EMPTY</div></div>';
+    return;
+  }
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img class="cart-item-thumb" src="${item.image}" alt="${item.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-sku">${item.sku}</div>
+        <div class="cart-item-bottom">
+          <div class="cart-qty">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+          </div>
+          <div class="cart-item-price">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</div>
+          <button class="cart-remove" onclick="removeItem(${item.id})">🗑</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(x => x.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
+  renderCart();
+}
+function removeItem(id) { cart = cart.filter(x => x.id !== id); renderCart(); }
+function toggleCart() {
+  document.getElementById('cartSidebar').classList.toggle('open');
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+function checkout() {
+  if (cart.length === 0) return;
+  showToast('Quote request sent!');
+  toggleCart();
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+}
+
+// MODAL
+function openModal(p) {
+  currentModalProduct = p;
+  document.getElementById('modalImg').innerHTML = `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;">`;
+  document.getElementById('modalSku').textContent = p.sku;
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalPrice').textContent = 'Rp ' + p.price.toLocaleString('id-ID');
+  document.getElementById('modalSpecs').innerHTML = Object.entries(p.specs).map(([k,v]) => `
+    <div class="modal-spec"><div class="modal-spec-key">${k}</div><div class="modal-spec-val">${v}</div></div>`).join('');
+  document.getElementById('modalAddBtn').onclick = () => { addToCart(p.id, null); closeModal(); };
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+// TOAST
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// FORM
+function handleForm(e) {
+  e.preventDefault();
+  showToast('Inquiry sent! We will contact you shortly.');
+  e.target.reset();
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.background =
+    window.scrollY > 50 ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.85)';
+});
+
+renderCatalog();
+renderCart();
+</script>
+</body>
+</html>
